@@ -10,6 +10,10 @@
 #include "Drawing/GraphManager.h"
 #include "MavlinkNode/MavlinkTranslation.h"
 
+#include <iostream>
+using namespace std;
+
+
 using SLR::Quaternion;
 using SLR::ToUpper;
 
@@ -44,6 +48,7 @@ shared_ptr<MavlinkNode> mlNode;
 
 int main(int argcp, char **argv)
 {
+  cout << "starting" << endl;
   PrintHelpText();
  
   // load parameters
