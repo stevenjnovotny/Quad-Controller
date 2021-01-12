@@ -4,7 +4,7 @@
 <img src="images/drone_control.gif" width="500"/>
 </p>
 
-The following describes the design and testing of a controller for a quadcopter using a cascaded controller as described in <i>Feed-Forward Parameter Identification for Precise Periodic Quadrocopter Motions</i> by Angela Schoellig et al. 
+The following describes the design and testing of a controller for a quadcopter using a cascaded controller as described in <i>Feed-Forward Parameter Identification for Precise Periodic Quadcopter Motions</i> by Angela Schoellig et al. 
 
 
 
@@ -70,7 +70,7 @@ The following were used for parameter tuning:
 
 1. **Parameter Ratios**: In this [one-page document](https://www.overleaf.com/read/bgrkghpggnyc#/61023787/) the ratio of velocity proportional gain to position proportional gain for a critically damped double integrator system were derived. An important conclusion is that the ratio of `kpV / kpP` should be 4.
 
-2. **Observing Behavior in Simulation**: The controller was developed in a process outlined below. The parameters were adjusted based on how quickly the drone approached the equillibrium position (P gain), how much the drone overshot (D gain), and ultimately how it handled drift (I gain).
+2. **Observing Behavior in Simulation**: The controller was developed in a process outlined below. The parameters were adjusted based on how quickly the drone approached the equilibrium position (P gain), how much the drone overshot (D gain), and ultimately how it handled drift (I gain).
 
 3. **Peer Discussion**: Taking advantage of the experience of others.
 
@@ -97,11 +97,11 @@ To accomplish this:
 
 The motor commands were taken by solving the following equation for <i>F</i> after receiving the commands for collective thrust and moments. Negative signs were introduced to be consistent with coordinate system in which the <i>z</i> axis pointed downward.
 <p align="center">
-<img src="images/motor_commands.png" width="300"/>
+<img src="images/motor_commands.png" width="400"/>
 </p>
 Moment commands for each axis were found by solving the following
 <p align="center">
-<img src="images/body_rate_control.png" width="300"/>
+<img src="images/body_rate_control.png" width="400"/>
 </p>
 After this, the rotation of the vehicle about roll (omega.x) was controlled to 0 while other rates remained zero. 
 
@@ -110,10 +110,10 @@ After this, the rotation of the vehicle about roll (omega.x) was controlled to 0
  - implement the function `RollPitchControl()`
  - Tune `kpBank` in `QuadControlParams.txt` to minimize settling time but avoid too much overshoot
 
-Roll and picth commands were generated using the following formulation
+Roll and pitch commands were generated using the following formulation
 
 <p align="center">
-<img src="images/roll_pitch_control.png" width="300"/>
+<img src="images/roll_pitch_control.png" width="400"/>
 </p>
 
 Once tuned, the quad leveled itself (as shown below), though it still tends to fly away slowly since the controller is not yet controlling velocity/position. 
@@ -135,7 +135,7 @@ Next, the position, altitude and yaw controller were implemented. The simulation
  The `LateralPositionControl()` function was completed by using the following equation for a <i>PD</i> controller in <i>x</i> and <i>y</i>
 
 <p align="center">
-<img src="images/lateral_position_control.png" width="400"/>
+<img src="images/lateral_position_control.png" width="500"/>
 </p>
 
 At this point, the quads should be going to their destination points and tracking error should be going down. However, one quad remains rotated in yaw.
@@ -154,7 +154,7 @@ The yaw controller was a simple <i>P</i> controller. The yaw position control wa
 
 ### Non-idealities and robustness (scenario 4) ###
 
-In this section, teh controller was tested for non-idealities and robustness.   IN this scenario, a configuration is presented with 3 quads that are all are trying to move one meter forward.  However, this time, these quads are all a bit different:
+In this section, the controller was tested for non-idealities and robustness.   IN this scenario, a configuration is presented with 3 quads that are all are trying to move one meter forward.  However, this time, these quads are all a bit different:
  - The green quad has its center of mass shifted back
  - The orange vehicle is an ideal quad
  - The red vehicle is heavier than usual
